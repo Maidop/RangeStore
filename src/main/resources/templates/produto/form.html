@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/template-padrao}">
+<head>
+</head>
+<body>
+	<section layout:fragment="conteudo">
+        <div class="container conteudo-principal">
+        	<h2>Formulário de Cadastro - Produtos</h2>
+        	
+        	<div class="row">
+        		<form id="frm" th:action="@{/produto}" method="post" 
+        			th:object="${produto}"
+        			onsubmit="return salvar('/produto');">
+        			<div class="row">
+        				<div class="form-group">
+	        				<label for="id">Código</label>
+	        				<input type="text" class="form-control"
+	        				   th:field="*{id}"	readonly/>
+        				</div>
+        			</div>
+        			
+        			<div class="row">
+        				<div class="form-group">
+	        				<label for="produto">Produto</label>
+	        				<input type="text" class="form-control" th:field="*{produto}" />
+        					<span th:if="${#fields.hasErrors('produto')}"
+        						th:errors="*{produto}" class="text-danger"></span>
+        				</div>
+        			</div> <!-- FIM PRODUTO -->
+        			
+        			<div class="row">
+        				<div class="form-group">
+	        				<label for="descricao">Descrição</label>
+	        				<textarea rows="5" cols="30" class="form-control" th:field="*{descricao}">
+	        				</textarea>
+	        				
+        					<span th:if="${#fields.hasErrors('descricao')}"
+        						th:errors="*{descricao}" class="text-danger"></span>
+        				</div>
+        			</div> <!-- FIM DESCRIÇÃO -->
+        			
+        			<div class="row">
+        				<div class="form-group">
+	        				<label for="valor">Valor</label>
+	        				<input type="text" class="form-control" th:field="*{valor}" />
+        					<span th:if="${#fields.hasErrors('valor')}"
+        						th:errors="*{valor}" class="text-danger"></span>
+        				</div>
+        			</div> <!-- FIM VALOR -->
+        			
+        			<div class="row">
+        				<div class="form-group">
+        					<label for="categoria">Categoria</label>
+        					<select class="form-control" 
+        						th:field="*{categoria}">
+        						<option value=""> (Selecione) </option>
+        						<option th:each="categoria: ${categoria}"
+        							th:value="${categoria.id}"
+        							th:text="${categoria.nome}"></option>
+        					</select>
+        					<span th:if="${#fields.hasErrors('categoria')}"
+        						th:errors="*{categoria}" class="text-danger"></span>
+        				</div>
+       				</div> <!-- FIM CATEGORIA -->
+       				
+       				<div class="row">
+        				<div class="form-group">
+        					<label for="marca">Marca</label>
+        					<select class="form-control" 
+        						th:field="*{marca}">
+        						<option value=""> (Selecione) </option>
+        						<option th:each="marca: ${marca}"
+        							th:value="${marca.id}"
+        							th:text="${marca.nome}"></option>
+        					</select>
+        					<span th:if="${#fields.hasErrors('marca')}"
+        						th:errors="*{marca}" class="text-danger"></span>
+        				</div>
+       				</div> <!-- FIM MARCA -->
+        			
+        			<div class="row">
+        				<button class="btn btn-primary" 
+        					type="submit" >Salvar</button>
+        			</div>
+        		</form>
+        	</div> <!-- FIM div row -->
+        </div>
+	</section>
+	<th:block layout:fragment="script">
+		<script type="text/javascript" th:src="@{/js/crud-actions.js}"></script>
+	</th:block>
+</body>
+</html>
+
+
+
+
+
+
+
+

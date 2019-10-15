@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/template-padrao}">
+<head>
+</head>
+<body>
+	<section layout:fragment="conteudo">
+        <div class="container conteudo-principal">
+        	<h2>Formulário de Cadastro - Fornecedores</h2>
+        	
+        	<div class="row">
+        		<form id="frm" th:action="@{/fornecedor}" method="post" 
+        			th:object="${fornecedor}"
+        			onsubmit="return salvar('/fornecedor');">
+        			<div class="row">
+        				<div class="form-group">
+	        				<label for="id">Código</label>
+	        				<input type="text" class="form-control"
+	        				   th:field="*{id}"	readonly/>
+        				</div>
+        			</div>
+        			
+        			<div class="row">
+        				<div class="form-group">
+	        				<label for="empresa">Empresa</label>
+	        				<input type="text" class="form-control" th:field="*{empresa}" />
+        					<span th:if="${#fields.hasErrors('empresa')}"
+        						th:errors="*{empresa}" class="text-danger"></span>
+        				</div>
+        			</div> <!-- FIM EMPRESA -->
+        			
+        			<div class="row">
+        				<div class="form-group">
+	        				<label for="razaoSocial">Razão Social</label>
+	        				<input type="text" class="form-control" th:field="*{razaoSocial}" />	        				
+        					<span th:if="${#fields.hasErrors('razaoSocial')}"
+        						th:errors="*{razaoSocial}" class="text-danger"></span>
+        				</div>
+        			</div> <!-- FIM RAZAOSOCIAL -->
+        			
+        			<div class="row">
+        				<div class="form-group">
+	        				<label for="cnpj">CNPJ</label>
+	        				<input type="text" class="form-control" th:field="*{cnpj}" />
+        					<span th:if="${#fields.hasErrors('cnpj')}"
+        						th:errors="*{cnpj}" class="text-danger"></span>
+        				</div>
+        			</div> <!-- FIM CNPJ -->
+        			
+        			<div class="row">
+        				<div class="form-group">
+	        				<label for="cnpj">Responsável</label>
+	        				<input type="text" class="form-control" th:field="*{cnpj}" />
+        					<span th:if="${#fields.hasErrors('cnpj')}"
+        						th:errors="*{cnpj}" class="text-danger"></span>
+        				</div>
+       				</div> <!-- FIM RESPONSAVEL -->
+       				
+       				<div class="row">
+        				<div class="form-group">
+	        				<label for="telefone">Telefone</label>
+	        				<input type="text" class="form-control" th:field="*{telefone}" />
+        					<span th:if="${#fields.hasErrors('telefone')}"
+        						th:errors="*{telefone}" class="text-danger"></span>
+        				</div>
+       				</div> <!-- FIM TELEFONE -->
+        			
+        			<div class="row">
+        				<button class="btn btn-primary" 
+        					type="submit" >Salvar</button>
+        			</div>
+        		</form>
+        	</div> <!-- FIM div row -->
+        </div>
+	</section>
+	<th:block layout:fragment="script">
+		<script type="text/javascript" th:src="@{/js/crud-actions.js}"></script>
+	</th:block>
+</body>
+</html>
+
+
+
+
+
+
+
+

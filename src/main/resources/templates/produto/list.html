@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/template-padrao}">
+<head>
+</head>
+<body>
+	<section layout:fragment="conteudo">
+        <div class="container conteudo-principal">
+        	<h1>Produtos</h1>
+        	<div class=row>
+        		<div class="col-md-6">
+        			<div th:if="${!#strings.isEmpty(sucesso)}" class="alert alert-success">
+    					<i class="fa fa-check-circle"></i>
+    					<span th:text="${sucesso}">Mensagem de sucesso!</span>
+        			</div>
+        			
+        			<div th:if="${!#strings.isEmpty(erro)}" 
+    					class="alert alert-danger">
+    					<i class="fa fa-trash"></i>
+    					<span th:text="${erro}">Mensagem de erro!</span>	
+   					</div>
+        			
+        		</div>
+        	</div>
+        	<a class="btn btn-primary" th:href="@{/}">
+        		<i class="fas fa-home"></i>
+        	</a>
+        	<a class="btn btn-primary" th:href="@{/produto/new}">
+        		<i class="fas fa-plus"></i> Novo
+        	</a>
+    		
+    		<table class="table table-striped table-responsive-md">
+    			<thead>
+    				<tr>
+    					<th>Id</th>
+    					<th>Produto</th>
+    					<th>Descrição</th>
+    					<th>Valor Unitário</th>
+    					<th>Categoria</th>
+    					<th>Marca</th>
+    					<th>Editar</th>
+    					<th>Remover</th>
+    				</tr>
+    			</thead>
+    			<tbody>
+    				<tr th:id="'row_' + ${produto.id}" th:each="produto: ${produto}">
+    					<td th:text="${produto.id}">Id</td>
+    					<td th:text="${produto.produto}">Produto</td>
+    					<td th:text="${produto.descricao}">Descrição</td>
+    					<td th:text="${produto.valor}">Valor</td>
+    					<td th:text="${produto.categoria.nome}">Categoria</td>
+    					<td th:text="${produto.marca.nome}">Marca</td>
+						<!-- EDITAR -->
+						<td>
+						<a th:href="@{/produto/{id}(id=${produto.id})}" class="btn btn-primary">
+							<i class="fas fa-edit ml-2"></i>
+						</a>
+						</td>
+						<!-- REMOVER -->
+						<td>
+							<form method="post" 
+								th:action="@{/produto/{id}?_method=DELETE(id=${produto.id})}"
+								onsubmit="return removerAjax(this, '/produto');"
+								>
+								<input type="hidden" name="_method" value="DELETE">
+								<button type="submit" class="btn btn-danger">
+									<i class="fas fa-trash ml-2"></i>
+								</button>
+							</form>
+						</td>
+    				</tr>
+    				<tr th:if="${produto.empty}">
+    					<td colspan="4">Nenhum registro encontrado!</td>
+    				</tr>
+    			</tbody>
+    		</table> <!-- FIM TABLE -->
+        </div>
+	</section>
+	
+	<th:block layout:fragment="script">
+		<script type="text/javascript" 
+			th:src="@{/js/crud-actions.js}"></script>
+	</th:block>
+</body>
+</html>
