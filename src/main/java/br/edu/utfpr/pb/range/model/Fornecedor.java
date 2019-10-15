@@ -32,12 +32,12 @@ public class Fornecedor {
 	@Column(length = 254, nullable = false)
 	private String razaoSocial;
 	
-	@Column(length = 13, nullable = false)
+	@Column(length = 15, nullable = false)
 	private String cnpj;
 	
 	@Column(length = 254, nullable = false)
 	private String responsavel;
 	
-	@Column(length = 11, nullable = false)
+	@Column(length = 12, nullable = false)
 	private String telefone;
 }
