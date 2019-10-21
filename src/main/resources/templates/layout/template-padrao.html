@@ -83,15 +83,10 @@
 							<i class="fa fa-book"></i> Compras
  						</a>
 					</li>	
-					<li class="nav-item"th:classappend="${#httpServletRequest.getRequestURI().startsWith('/estoque') ? 'active' : ''}">
-						<a class="nav-link" th:href="@{/estoque}">
-							<i class="fa fa-book"></i> Estoque
- 						</a>
-					</li>	
 				</ul>	
         </section>
         <section class="col-lg-10" layout:fragment="conteudo"> <!-- Sessão de conteúdo -->
-            As páginas serão carregadas aqui...
+            Aqui a mágica acontece!
         </section>
     </div>
 	<footer class="">
