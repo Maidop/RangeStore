@@ -49,24 +49,12 @@ public class CompraController {
 	private FornecedorService fornecedorService;
 	
 	@GetMapping
-	public String list(@RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size,
-			Model model) {
-		int currentPage = page.orElse(1);
-		int pageSize = size.orElse(5);
+	public String formulatioCompra(Model model) {
 
-		Page<Compra> list = this.compraService.findAll(PageRequest.of(currentPage - 1, pageSize));
-
-		model.addAttribute("list", list);
 		model.addAttribute("categoria", categoriaService.findAll());
 		model.addAttribute("marca", marcaService.findAll());
 		model.addAttribute("produto", produtoService.findAll());
 		model.addAttribute("fornecedor", fornecedorService.findAll());
-
-		if (list.getTotalPages() > 0) {
-			List<Integer> pageNumbers = IntStream.rangeClosed(1, list.getTotalPages()).boxed()
-					.collect(Collectors.toList());
-			model.addAttribute("pageNumbers", pageNumbers);
-		}
 
 		return "compra/form";
 	}
